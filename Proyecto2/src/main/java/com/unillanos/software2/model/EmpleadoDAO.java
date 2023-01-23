@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modelo;
+package com.unillanos.software2.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author oguev
  */
 public class EmpleadoDAO {
@@ -47,7 +46,38 @@ public class EmpleadoDAO {
                 datos.add(e);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return datos;
+    }
+
+    //Save empleado
+
+    public int save(Empleado e) {
+        int r = 0;
+        String sql = "insert into EMPLEADOS (id,tipo, nombre_1, nombre_2, apellido_1, apellido_2, sexo, fecha_n, lugar_n, direccion, telefono, email, salario, activo, clave) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        con = conec.getCon();
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, e.getId());
+            ps.setString(2, e.getTipo());
+            ps.setString(3, e.getNombre_1());
+            ps.setString(4, e.getNombre_2());
+            ps.setString(5, e.getApellido_1());
+            ps.setString(6, e.getApellido_2());
+            ps.setString(7, e.getSexo());
+            ps.setString(8, e.getFecha_n());
+            ps.setString(9, e.getLugar_n());
+            ps.setString(10, e.getDireccion());
+            ps.setString(11, e.getTelefono());
+            ps.setString(12, e.getEmail());
+            ps.setInt(13, e.getSalario());
+            ps.setString(14, e.getActivo());
+            ps.setString(15, e.getClave());
+            r = ps.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return r;
     }
 }
