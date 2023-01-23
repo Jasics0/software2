@@ -9,6 +9,7 @@ import com.unillanos.software2.model.Empleado;
 import com.unillanos.software2.model.EmpleadoDAO;
 
 import javax.swing.table.DefaultTableModel;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +22,12 @@ public class Controlador {
 
 
     public DefaultTableModel listar(DefaultTableModel modelo) {
+
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i -= 1;
+        }
+
         List<Empleado> lista = dao.Listar();
         Object[] object = new Object[15];
         for (int i = 0; i < lista.size(); i++) {
@@ -45,8 +52,8 @@ public class Controlador {
         return modelo;
     }
 
-    public boolean guardar(String id, String nombre_1, String nombre_2, String apellido_1, String apellido_2, String sexo, String fecha_n, String direccion, String telefono, String email, int salario, String activo, String clave) {
-        String tipo = "cc";
+    public boolean guardar(String id, String nombre_1, String nombre_2, String apellido_1, String apellido_2, String sexo, Date fecha_n, String direccion, String telefono, String email, int salario, String activo, String clave) {
+        String tipo = "CC";
         String lugar_n = "Villavisexo";
         e.setId(Integer.parseInt(id));
         e.setTipo(tipo);
@@ -55,7 +62,7 @@ public class Controlador {
         e.setApellido_1(apellido_1);
         e.setApellido_2(apellido_2);
         e.setSexo(sexo);
-        e.setFecha_n(fecha_n);
+        e.setFecha_n(new java.sql.Date(fecha_n.getTime()));
         e.setLugar_n(lugar_n);
         e.setDireccion(direccion);
         e.setTelefono(telefono);
@@ -63,11 +70,36 @@ public class Controlador {
         e.setSalario(salario);
         e.setActivo(activo);
         e.setClave(clave);
+
+
         int response = dao.save(e);
-        if (response == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return response == 1;
+    }
+
+    public boolean actualizar(String id, String nombre_1, String nombre_2, String apellido_1, String apellido_2, String sexo, Date fecha_n, String direccion, String telefono, String email, int salario, String activo, String clave) {
+        String tipo = "CC";
+        String lugar_n = "Villavisexo";
+        e.setId(Integer.parseInt(id));
+        e.setTipo(tipo);
+        e.setNombre_1(nombre_1);
+        e.setNombre_2(nombre_2);
+        e.setApellido_1(apellido_1);
+        e.setApellido_2(apellido_2);
+        e.setSexo(sexo);
+        e.setFecha_n(new java.sql.Date(fecha_n.getTime()));
+        e.setLugar_n(lugar_n);
+        e.setDireccion(direccion);
+        e.setTelefono(telefono);
+        e.setEmail(email);
+        e.setSalario(salario);
+        e.setActivo(activo);
+        e.setClave(clave);
+        int response = dao.update(e);
+        return response == 1;
+    }
+
+    public boolean eliminar(int id){
+        int response = dao.delete(id);
+        return response == 1;
     }
 }

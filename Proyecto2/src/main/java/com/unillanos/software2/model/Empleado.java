@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 /**
  * @author oguev
  */
@@ -16,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Empleado {
     int id, salario;
-    String tipo, nombre_1, nombre_2, apellido_1, apellido_2, sexo, fecha_n, lugar_n, direccion, telefono, email, activo, clave;
-
+    String tipo, nombre_1, nombre_2, apellido_1, apellido_2, sexo, lugar_n, direccion, telefono, email, activo, clave;
+    Date fecha_n;
 
 }

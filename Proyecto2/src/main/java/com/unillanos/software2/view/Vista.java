@@ -96,11 +96,18 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
+        btneliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                c.eliminar(Integer.parseInt(txtid.getText()));
+            }
+        });
+
         txtdireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtdireccionActionPerformed(evt);
             }
         });
+
 
         jLabel11.setText("SALARIO");
 
@@ -113,7 +120,11 @@ public class Vista extends javax.swing.JFrame {
         btnguardar.setText("GUARDAR");
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), txtsalario.getText(), txtclave.getText(), comboactivo.getSelectedItem().toString());
+                int salario=0;
+                if (!txtsalario.getText().isEmpty() && txtsalario.getText()!=null && !txtsalario.getText().equals("")){
+                    salario= Integer.parseInt(txtsalario.getText());
+                }
+                c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString());
             }
         });
 
@@ -122,7 +133,7 @@ public class Vista extends javax.swing.JFrame {
         btnlistar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
-               tabla.setModel(c.listar((DefaultTableModel) tabla.getModel()));
+                tabla.setModel(c.listar((DefaultTableModel) tabla.getModel()));
             }
         });
 
@@ -131,7 +142,7 @@ public class Vista extends javax.swing.JFrame {
 
         btneditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btneditarActionPerformed(evt);
+                c.actualizar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), Integer.parseInt(txtsalario.getText()), txtclave.getText(), comboactivo.getSelectedItem().toString());
             }
         });
 

@@ -41,7 +41,7 @@ public class EmpleadoDAO {
                 e.setApellido_1(rs.getString(5));
                 e.setApellido_2(rs.getString(6));
                 e.setSexo(rs.getString(7));
-                e.setFecha_n(rs.getString(8));
+                e.setFecha_n(rs.getDate(8));
                 e.setLugar_n(rs.getString(9));
                 e.setDireccion(rs.getString(10));
                 e.setTelefono(rs.getString(11));
@@ -61,7 +61,7 @@ public class EmpleadoDAO {
 
     public int save(Empleado e) {
         int r = 0;
-        String sql = "insert into EMPLEADOS (id,tipo, nombre_1, nombre_2, apellido_1, apellido_2, sexo, fecha_n, lugar_n, direccion, telefono, email, salario, activo, clave) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into EMPLEADOS (identificacion,tipo, nombre_1, nombre_2, apellido_1, apellido_2, sexo, fecha_n, lugar_n, direccion, telefono, email, salario, activo, clave) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, e.getId());
@@ -71,7 +71,7 @@ public class EmpleadoDAO {
             ps.setString(5, e.getApellido_1());
             ps.setString(6, e.getApellido_2());
             ps.setString(7, e.getSexo());
-            ps.setString(8, e.getFecha_n());
+            ps.setDate(8, e.getFecha_n());
             ps.setString(9, e.getLugar_n());
             ps.setString(10, e.getDireccion());
             ps.setString(11, e.getTelefono());
@@ -90,7 +90,7 @@ public class EmpleadoDAO {
 
     public int update(Empleado e) {
         int r = 0;
-        String sql = "update EMPLEADOS set tipo=?, nombre_1=?, nombre_2=?, apellido_1=?, apellido_2=?, sexo=?, fecha_n=?, lugar_n=?, direccion=?, telefono=?, email=?, salario=?, activo=?, clave=? where id=?";
+        String sql = "update EMPLEADOS set tipo=?, nombre_1=?, nombre_2=?, apellido_1=?, apellido_2=?, sexo=?, fecha_n=?, lugar_n=?, direccion=?, telefono=?, email=?, salario=?, activo=?, clave=? where identificacion=?";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, e.getTipo());
@@ -99,7 +99,7 @@ public class EmpleadoDAO {
             ps.setString(4, e.getApellido_1());
             ps.setString(5, e.getApellido_2());
             ps.setString(6, e.getSexo());
-            ps.setString(7, e.getFecha_n());
+            ps.setDate(7, e.getFecha_n());
             ps.setString(8, e.getLugar_n());
             ps.setString(9, e.getDireccion());
             ps.setString(10, e.getTelefono());
@@ -117,14 +117,16 @@ public class EmpleadoDAO {
 
     //Delete empleado
 
-    public void delete(int id) {
-        String sql = "delete from EMPLEADOS where id=?";
+    public int delete(int id) {
+        String sql = "delete from EMPLEADOS where identificacion=?";
+        int r=0;
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-            ps.executeUpdate();
+            r=ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return r;
     }
 }
