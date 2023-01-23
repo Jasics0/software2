@@ -15,15 +15,21 @@ import java.util.List;
  */
 public class EmpleadoDAO {
 
-    Conexion conec = new Conexion();
-    Connection con;
-    PreparedStatement ps;
-    ResultSet rs;
+    private Conexion conexion = new Conexion();
 
-    public List Listar() {
+    private Connection con;
+
+    private PreparedStatement ps;
+
+    private ResultSet rs;
+
+    public EmpleadoDAO() {
+        con = conexion.getCon();
+    }
+
+    public List<Empleado> Listar() {
         List<Empleado> datos = new ArrayList<>();
         try {
-            con = conec.con();
             ps = con.prepareStatement("select * from EMPLEADOS");
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -56,7 +62,6 @@ public class EmpleadoDAO {
     public int save(Empleado e) {
         int r = 0;
         String sql = "insert into EMPLEADOS (id,tipo, nombre_1, nombre_2, apellido_1, apellido_2, sexo, fecha_n, lugar_n, direccion, telefono, email, salario, activo, clave) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        con = conec.getCon();
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, e.getId());
@@ -79,5 +84,47 @@ public class EmpleadoDAO {
             ex.printStackTrace();
         }
         return r;
+    }
+
+    //Update empleado
+
+    public int update(Empleado e) {
+        int r = 0;
+        String sql = "update EMPLEADOS set tipo=?, nombre_1=?, nombre_2=?, apellido_1=?, apellido_2=?, sexo=?, fecha_n=?, lugar_n=?, direccion=?, telefono=?, email=?, salario=?, activo=?, clave=? where id=?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, e.getTipo());
+            ps.setString(2, e.getNombre_1());
+            ps.setString(3, e.getNombre_2());
+            ps.setString(4, e.getApellido_1());
+            ps.setString(5, e.getApellido_2());
+            ps.setString(6, e.getSexo());
+            ps.setString(7, e.getFecha_n());
+            ps.setString(8, e.getLugar_n());
+            ps.setString(9, e.getDireccion());
+            ps.setString(10, e.getTelefono());
+            ps.setString(11, e.getEmail());
+            ps.setInt(12, e.getSalario());
+            ps.setString(13, e.getActivo());
+            ps.setString(14, e.getClave());
+            ps.setInt(15, e.getId());
+            r = ps.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return r;
+    }
+
+    //Delete empleado
+
+    public void delete(int id) {
+        String sql = "delete from EMPLEADOS where id=?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
