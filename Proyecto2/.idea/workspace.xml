@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="64de8e2b-6b0c-4b85-9fd8-475514113421" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+</project>
