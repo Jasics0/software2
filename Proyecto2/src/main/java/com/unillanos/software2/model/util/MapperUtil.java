@@ -1,7 +1,7 @@
-package com.unillanos.software2.util;
+package com.unillanos.software2.model.util;
 
-import com.unillanos.software2.dto.EmpleadoDTO;
-import com.unillanos.software2.model.Empleado;
+import com.unillanos.software2.controller.transfer.dto.EmpleadoDTO;
+import com.unillanos.software2.model.entities.Empleado;
 
 public class MapperUtil {
 

@@ -381,29 +381,27 @@ public class Vista extends javax.swing.JFrame {
             if (!txtsalario.getText().isEmpty() && txtsalario.getText() != null && !txtsalario.getText().equals("")) {
                 salario = Integer.parseInt(txtsalario.getText());
             }
-            c.guardar("oracle", txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString());
-            c.guardar("mysql", txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString());
+            c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString());
+            c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString());
         });
 
         btnlistar.addActionListener(evt -> {
-            tablaOracle.setModel(c.listar("oracle", (DefaultTableModel) tablaOracle.getModel()));
-            tabla.setModel(c.listar("mysql", (DefaultTableModel) tabla.getModel()));
+            tablaOracle.setModel(c.listar((DefaultTableModel) tablaOracle.getModel(), 0));
+            tabla.setModel(c.listar((DefaultTableModel) tabla.getModel(), 1));
         });
 
         btneditar.addActionListener(evt -> {
-            c.actualizar("oracle", txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), Integer.parseInt(txtsalario.getText()), txtclave.getText(), comboactivo.getSelectedItem().toString());
-            c.actualizar("mysql", txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), Integer.parseInt(txtsalario.getText()), txtclave.getText(), comboactivo.getSelectedItem().toString());
+            c.actualizar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), Integer.parseInt(txtsalario.getText()), txtclave.getText(), comboactivo.getSelectedItem().toString());
         });
 
         btneliminar.addActionListener(evt -> {
-            c.eliminar("oracle", Integer.parseInt(txtid.getText()));
-            c.eliminar("mysql", Integer.parseInt(txtid.getText()));
+            c.eliminar(Integer.parseInt(txtid.getText()));
         });
 
         btnfunction.addActionListener(evt -> {
             try {
-                txtfuncionO.setText(c.cantidadPagaEmpleado("oracle", Integer.parseInt(txtid.getText())));
-                txtfuncionM.setText(c.cantidadPagaEmpleado("mysql", Integer.parseInt(txtid.getText())));
+                txtfuncionO.setText(c.cantidadPagaEmpleado(Integer.parseInt(txtid.getText()), 0));
+                txtfuncionM.setText(c.cantidadPagaEmpleado(Integer.parseInt(txtid.getText()), 1));
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -431,6 +429,18 @@ public class Vista extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cleanModel() {
+        for (int i = 0; i < tablaOracle.getModel().getRowCount(); i++) {
+            ((DefaultTableModel) tablaOracle.getModel()).removeRow(i);
+            i -= 1;
+        }
+
+        for (int i = 0; i < tabla.getModel().getRowCount(); i++) {
+            ((DefaultTableModel) tabla.getModel()).removeRow(i);
+            i -= 1;
+        }
+    }
 
     /**
      * @param args the command line arguments

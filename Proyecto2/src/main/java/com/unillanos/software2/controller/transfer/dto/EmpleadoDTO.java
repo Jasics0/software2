@@ -1,4 +1,4 @@
-package com.unillanos.software2.dto;
+package com.unillanos.software2.controller.transfer.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

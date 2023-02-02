@@ -1,23 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.unillanos.software2.model;
+package com.unillanos.software2.model.database.implementation;
 
-import com.unillanos.software2.dto.EmpleadoDTO;
-import com.unillanos.software2.util.MapperUtil;
+import com.unillanos.software2.model.database.Conexion;
+import com.unillanos.software2.model.database.interfaces.EmpleadoRepository;
+import com.unillanos.software2.model.entities.Empleado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author oguev
- */
-public class EmpleadoDAO {
+public class EmpleadoRepositoryImpl implements EmpleadoRepository {
+
     Conexion conexion;
     private final Connection mySqlConnection;
 
@@ -27,7 +21,7 @@ public class EmpleadoDAO {
 
     private ResultSet rs;
 
-    public EmpleadoDAO() {
+    public EmpleadoRepositoryImpl() {
         conexion = Conexion.getInstance();
         mySqlConnection = conexion.getMySqlConnection();
         oracleConnection = conexion.getOracleConnection();
@@ -41,8 +35,7 @@ public class EmpleadoDAO {
         }
     }
 
-    public List<EmpleadoDTO> Listar(String con) {
-        List<EmpleadoDTO> response = new ArrayList<>();
+    private List<Empleado> getEmpleados(String con) {
         List<Empleado> datos = new ArrayList<>();
         try {
             ps = getConnection(con).prepareStatement("select * from EMPLEADOS order by identificacion");
@@ -66,19 +59,14 @@ public class EmpleadoDAO {
                 e.setClave(rs.getString(15));
                 datos.add(e);
             }
-            for (Empleado dato : datos) {
-                response.add(MapperUtil.entityToDtoEmpleado(dato));
-            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return response;
+        return datos;
     }
 
-    //Save empleado
-
-    public int save(String con, EmpleadoDTO e) {
+    private int saveEmpleado(Empleado e, String con) {
         int r = 0;
         String sql = "insert into EMPLEADOS (identificacion,tipo, nombre_1, nombre_2, apellido_1, apellido_2, sexo, fecha_n, lugar_n, direccion, telefono, email, salario, activo, clave) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
@@ -105,9 +93,23 @@ public class EmpleadoDAO {
         return r;
     }
 
-    //Update empleado
+    private int deleteEmpleado(int id, String con){
+        String sql = "delete from EMPLEADOS where identificacion=?";
+        int r = 0;
+        try {
+            ps = getConnection(con).prepareStatement(sql);
+            ps.setInt(1, id);
+            r = ps.executeUpdate();
+            if (con.equals("oracle")) {
+                getConnection(con).commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return r;
+    }
 
-    public int update(String con, EmpleadoDTO e) {
+    private int updateEmpleado(Empleado e,String con){
         int r = 0;
         String sql = "update EMPLEADOS set tipo=?, nombre_1=?, nombre_2=?, apellido_1=?, apellido_2=?, sexo=?, fecha_n=?, lugar_n=?, direccion=?, telefono=?, email=?, salario=?, activo=?, clave=? where identificacion=?";
         try {
@@ -134,27 +136,8 @@ public class EmpleadoDAO {
         return r;
     }
 
-    //Delete empleado
-
-    public int delete(String con, int id) {
-        String sql = "delete from EMPLEADOS where identificacion=?";
-        int r = 0;
-        try {
-            ps = getConnection(con).prepareStatement(sql);
-            ps.setInt(1, id);
-            r = ps.executeUpdate();
-            if (con.equals("oracle")) {
-                getConnection(con).commit();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return r;
-    }
-
-    public String cantidadPagaEmpleado(String con, int id) throws SQLException {
+    private String getFunction(int id, String con){
         String sql;
-        int r = 0;
         try {
             if (con.equals("oracle")) {
                 sql = "SELECT CANTIDAD_PAGA_EMPLEADO(?) FROM dual";
@@ -164,10 +147,50 @@ public class EmpleadoDAO {
             ps = getConnection(con).prepareStatement(sql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
+            rs.next();
+            return rs.getString(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        rs.next();
-        return rs.getString(1);
+        return null;
+    }
+
+    @Override
+    public List<List<Empleado>> findAll() {
+        List<List<Empleado>> data = new ArrayList<>();
+        List<Empleado> ora = getEmpleados("oracle");
+        List<Empleado> mys = getEmpleados("mys");
+        data.add(ora);
+        data.add(mys);
+        return data;
+    }
+
+    @Override
+    public int save(Empleado empleado) {
+        int saved = saveEmpleado(empleado, "oracle");
+        saved *= saveEmpleado(empleado, "mys");
+        return saved;
+    }
+
+    @Override
+    public int delete(int empleado) {
+        int deleted= deleteEmpleado(empleado,"oracle");
+        deleted*= deleteEmpleado(empleado,"mys");
+        return deleted;
+    }
+
+    @Override
+    public int update(Empleado empleado) {
+        int updated= updateEmpleado(empleado,"oracle");
+        updated*= updateEmpleado(empleado,"mys");
+        return updated;
+    }
+
+    @Override
+    public List<String> cantidadPagaEmpleado(int id) {
+        List<String> cantity= new ArrayList<>();
+        cantity.add(getFunction(id,"oracle"));
+        cantity.add(getFunction(id,"mys"));
+        return cantity;
     }
 }
