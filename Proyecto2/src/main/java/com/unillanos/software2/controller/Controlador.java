@@ -5,6 +5,7 @@
 package com.unillanos.software2.controller;
 
 
+import com.unillanos.software2.dto.EmpleadoDTO;
 import com.unillanos.software2.model.Conexion;
 import com.unillanos.software2.model.Empleado;
 import com.unillanos.software2.model.EmpleadoDAO;
@@ -19,8 +20,8 @@ import java.util.List;
  */
 public class Controlador {
 
-    private EmpleadoDAO dao = new EmpleadoDAO();
-    private Empleado e = new Empleado();
+    private final EmpleadoDAO dao = new EmpleadoDAO();
+    private final EmpleadoDTO e = new EmpleadoDTO();
 
 
     public DefaultTableModel listar(String con, DefaultTableModel modelo) {
@@ -28,24 +29,24 @@ public class Controlador {
             modelo.removeRow(i);
             i -= 1;
         }
-        List<Empleado> lista = dao.Listar(con);
+        List<EmpleadoDTO> lista = dao.Listar(con);
         Object[] object = new Object[15];
-        for (Empleado empleado : lista) {
-            object[0] = empleado.getId();
-            object[1] = empleado.getTipo();
-            object[2] = empleado.getNombre_1();
-            object[3] = empleado.getNombre_2();
-            object[4] = empleado.getApellido_1();
-            object[5] = empleado.getApellido_2();
-            object[6] = empleado.getSexo();
-            object[7] = empleado.getFecha_n();
-            object[8] = empleado.getLugar_n();
-            object[9] = empleado.getDireccion();
-            object[10] = empleado.getTelefono();
-            object[11] = empleado.getEmail();
-            object[12] = empleado.getSalario();
-            object[13] = empleado.getActivo();
-            object[14] = empleado.getClave();
+        for (EmpleadoDTO empleadoDTO : lista) {
+            object[0] = empleadoDTO.getId();
+            object[1] = empleadoDTO.getTipo();
+            object[2] = empleadoDTO.getNombre_1();
+            object[3] = empleadoDTO.getNombre_2();
+            object[4] = empleadoDTO.getApellido_1();
+            object[5] = empleadoDTO.getApellido_2();
+            object[6] = empleadoDTO.getSexo();
+            object[7] = empleadoDTO.getFecha_n();
+            object[8] = empleadoDTO.getLugar_n();
+            object[9] = empleadoDTO.getDireccion();
+            object[10] = empleadoDTO.getTelefono();
+            object[11] = empleadoDTO.getEmail();
+            object[12] = empleadoDTO.getSalario();
+            object[13] = empleadoDTO.getActivo();
+            object[14] = empleadoDTO.getClave();
             modelo.addRow(object);
         }
         Conexion conexion = Conexion.getInstance();

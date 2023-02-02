@@ -8,6 +8,7 @@ package com.unillanos.software2.view;
 import com.unillanos.software2.controller.Controlador;
 
 import javax.swing.table.DefaultTableModel;
+import java.sql.SQLException;
 
 /**
  * @author oguev
@@ -63,7 +64,7 @@ public class Vista extends javax.swing.JFrame {
         btneliminar = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         txtlugar = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnfunction = new javax.swing.JButton();
         txtfuncionM = new javax.swing.JTextField();
         txtfuncionO = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -139,8 +140,8 @@ public class Vista extends javax.swing.JFrame {
 
         jLabel14.setText("LUGAR");
 
-        jButton1.setText("FUNCION");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnfunction.setText("FUNCION");
+        btnfunction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
@@ -224,7 +225,7 @@ public class Vista extends javax.swing.JFrame {
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addComponent(btnguardar)
                                                         .addGap(116, 116, 116)
-                                                        .addComponent(jButton1))))
+                                                        .addComponent(btnfunction))))
                                 .addContainerGap(129, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -239,7 +240,7 @@ public class Vista extends javax.swing.JFrame {
                                         .addComponent(jLabel11)
                                         .addComponent(txtsalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnguardar)
-                                        .addComponent(jButton1))
+                                        .addComponent(btnfunction))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel2)
@@ -375,6 +376,39 @@ public class Vista extends javax.swing.JFrame {
                                 .addContainerGap())
         );
 
+        btnguardar.addActionListener(evt -> {
+            int salario = 0;
+            if (!txtsalario.getText().isEmpty() && txtsalario.getText() != null && !txtsalario.getText().equals("")) {
+                salario = Integer.parseInt(txtsalario.getText());
+            }
+            c.guardar("oracle", txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString());
+            c.guardar("mysql", txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString());
+        });
+
+        btnlistar.addActionListener(evt -> {
+            tablaOracle.setModel(c.listar("oracle", (DefaultTableModel) tablaOracle.getModel()));
+            tabla.setModel(c.listar("mysql", (DefaultTableModel) tabla.getModel()));
+        });
+
+        btneditar.addActionListener(evt -> {
+            c.actualizar("oracle", txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), Integer.parseInt(txtsalario.getText()), txtclave.getText(), comboactivo.getSelectedItem().toString());
+            c.actualizar("mysql", txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), Integer.parseInt(txtsalario.getText()), txtclave.getText(), comboactivo.getSelectedItem().toString());
+        });
+
+        btneliminar.addActionListener(evt -> {
+            c.eliminar("oracle", Integer.parseInt(txtid.getText()));
+            c.eliminar("mysql", Integer.parseInt(txtid.getText()));
+        });
+
+        btnfunction.addActionListener(evt -> {
+            try {
+                txtfuncionO.setText(c.cantidadPagaEmpleado("oracle", Integer.parseInt(txtid.getText())));
+                txtfuncionM.setText(c.cantidadPagaEmpleado("mysql", Integer.parseInt(txtid.getText())));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -418,7 +452,7 @@ public class Vista extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> comboactivo;
     public javax.swing.JComboBox<String> combosex;
     public org.jdesktop.swingx.JXDatePicker date_n;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnfunction;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

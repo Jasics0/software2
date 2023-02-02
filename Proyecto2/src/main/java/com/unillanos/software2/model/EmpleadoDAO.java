@@ -4,6 +4,9 @@
  */
 package com.unillanos.software2.model;
 
+import com.unillanos.software2.dto.EmpleadoDTO;
+import com.unillanos.software2.util.MapperUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +28,7 @@ public class EmpleadoDAO {
     private ResultSet rs;
 
     public EmpleadoDAO() {
-        conexion=Conexion.getInstance();
+        conexion = Conexion.getInstance();
         mySqlConnection = conexion.getMySqlConnection();
         oracleConnection = conexion.getOracleConnection();
     }
@@ -38,7 +41,8 @@ public class EmpleadoDAO {
         }
     }
 
-    public List<Empleado> Listar(String con) {
+    public List<EmpleadoDTO> Listar(String con) {
+        List<EmpleadoDTO> response = new ArrayList<>();
         List<Empleado> datos = new ArrayList<>();
         try {
             ps = getConnection(con).prepareStatement("select * from EMPLEADOS order by identificacion");
@@ -62,15 +66,19 @@ public class EmpleadoDAO {
                 e.setClave(rs.getString(15));
                 datos.add(e);
             }
+            for (Empleado dato : datos) {
+                response.add(MapperUtil.entityToDtoEmpleado(dato));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return datos;
+        return response;
     }
 
     //Save empleado
 
-    public int save(String con, Empleado e) {
+    public int save(String con, EmpleadoDTO e) {
         int r = 0;
         String sql = "insert into EMPLEADOS (identificacion,tipo, nombre_1, nombre_2, apellido_1, apellido_2, sexo, fecha_n, lugar_n, direccion, telefono, email, salario, activo, clave) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
@@ -99,7 +107,7 @@ public class EmpleadoDAO {
 
     //Update empleado
 
-    public int update(String con, Empleado e) {
+    public int update(String con, EmpleadoDTO e) {
         int r = 0;
         String sql = "update EMPLEADOS set tipo=?, nombre_1=?, nombre_2=?, apellido_1=?, apellido_2=?, sexo=?, fecha_n=?, lugar_n=?, direccion=?, telefono=?, email=?, salario=?, activo=?, clave=? where identificacion=?";
         try {

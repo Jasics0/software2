@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
-    <list default="true" id="64de8e2b-6b0c-4b85-9fd8-475514113421" name="Changes" comment="">
-=======
     <list default="true" id="260f8957-f5b7-49d0-b38a-004c8db0103e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/Controlador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/Conexion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/EmpleadoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/EmpleadoDAO.java" afterDir="false" />
->>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.java" afterDir="false" />
     </list>
@@ -22,11 +19,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-<<<<<<< Updated upstream
-  <component name="TaskManager">
-    <servers />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
-=======
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -126,5 +125,4 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
->>>>>>> Stashed changes
 </project>
