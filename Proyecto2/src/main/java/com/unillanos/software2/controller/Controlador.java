@@ -5,10 +5,8 @@
 package com.unillanos.software2.controller;
 
 
-import com.unillanos.software2.dto.EmpleadoDTO;
-import com.unillanos.software2.model.Conexion;
-import com.unillanos.software2.model.Empleado;
-import com.unillanos.software2.model.EmpleadoDAO;
+import com.unillanos.software2.controller.transfer.dto.EmpleadoDTO;
+import com.unillanos.software2.model.dao.EmpleadoDAO;
 
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
@@ -24,12 +22,8 @@ public class Controlador {
     private final EmpleadoDTO e = new EmpleadoDTO();
 
 
-    public DefaultTableModel listar(String con, DefaultTableModel modelo) {
-        for (int i = 0; i < modelo.getRowCount(); i++) {
-            modelo.removeRow(i);
-            i -= 1;
-        }
-        List<EmpleadoDTO> lista = dao.Listar(con);
+    public DefaultTableModel listar(DefaultTableModel modelo,int d) {
+        List<EmpleadoDTO> lista = dao.Listar().get(d);
         Object[] object = new Object[15];
         for (EmpleadoDTO empleadoDTO : lista) {
             object[0] = empleadoDTO.getId();
@@ -49,11 +43,10 @@ public class Controlador {
             object[14] = empleadoDTO.getClave();
             modelo.addRow(object);
         }
-        Conexion conexion = Conexion.getInstance();
         return modelo;
     }
 
-    public boolean guardar(String con, String id, String nombre_1, String nombre_2, String apellido_1, String apellido_2, String sexo, Date fecha_n, String lugar_n, String direccion, String telefono, String email, int salario, String clave, String activo) {
+    public boolean guardar( String id, String nombre_1, String nombre_2, String apellido_1, String apellido_2, String sexo, Date fecha_n, String lugar_n, String direccion, String telefono, String email, int salario, String clave, String activo) {
         String tipo = "CC";
         e.setId(Integer.parseInt(id));
         e.setTipo(tipo);
@@ -70,11 +63,11 @@ public class Controlador {
         e.setSalario(salario);
         e.setActivo(activo);
         e.setClave(clave);
-        int response = dao.save(con, e);
+        int response = dao.save(e);
         return response == 1;
     }
 
-    public boolean actualizar(String con, String id, String nombre_1, String nombre_2, String apellido_1, String apellido_2, String sexo, Date fecha_n, String lugar_n, String direccion, String telefono, String email, int salario, String clave, String activo) {
+    public boolean actualizar(String id, String nombre_1, String nombre_2, String apellido_1, String apellido_2, String sexo, Date fecha_n, String lugar_n, String direccion, String telefono, String email, int salario, String clave, String activo) {
         String tipo = "CC";
         e.setId(Integer.parseInt(id));
         e.setTipo(tipo);
@@ -91,16 +84,16 @@ public class Controlador {
         e.setSalario(salario);
         e.setActivo(activo);
         e.setClave(clave);
-        int response = dao.update(con, e);
+        int response = dao.update(e);
         return response == 1;
     }
 
-    public boolean eliminar(String con, int id) {
-        int response = dao.delete(con, id);
+    public boolean eliminar( int id) {
+        int response = dao.delete( id);
         return response == 1;
     }
 
-    public String cantidadPagaEmpleado(String con, int id) throws SQLException {
-        return dao.cantidadPagaEmpleado(con, id);
+    public String cantidadPagaEmpleado(int id,int d) throws SQLException {
+        return dao.cantidadPagaEmpleado(id).get(d);
     }
 }
