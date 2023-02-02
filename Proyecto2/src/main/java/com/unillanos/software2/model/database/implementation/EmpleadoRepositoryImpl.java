@@ -93,7 +93,7 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
         return r;
     }
 
-    private int deleteEmpleado(int id, String con){
+    private int deleteEmpleado(int id, String con) {
         String sql = "delete from EMPLEADOS where identificacion=?";
         int r = 0;
         try {
@@ -109,7 +109,7 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
         return r;
     }
 
-    private int updateEmpleado(Empleado e,String con){
+    private int updateEmpleado(Empleado e, String con) {
         int r = 0;
         String sql = "update EMPLEADOS set tipo=?, nombre_1=?, nombre_2=?, apellido_1=?, apellido_2=?, sexo=?, fecha_n=?, lugar_n=?, direccion=?, telefono=?, email=?, salario=?, activo=?, clave=? where identificacion=?";
         try {
@@ -136,7 +136,7 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
         return r;
     }
 
-    private String getFunction(int id, String con){
+    private String getFunction(int id, String con) {
         String sql;
         try {
             if (con.equals("oracle")) {
@@ -174,23 +174,23 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
 
     @Override
     public int delete(int empleado) {
-        int deleted= deleteEmpleado(empleado,"oracle");
-        deleted*= deleteEmpleado(empleado,"mys");
+        int deleted = deleteEmpleado(empleado, "oracle");
+        deleted *= deleteEmpleado(empleado, "mys");
         return deleted;
     }
 
     @Override
     public int update(Empleado empleado) {
-        int updated= updateEmpleado(empleado,"oracle");
-        updated*= updateEmpleado(empleado,"mys");
+        int updated = updateEmpleado(empleado, "oracle");
+        updated *= updateEmpleado(empleado, "mys");
         return updated;
     }
 
     @Override
     public List<String> cantidadPagaEmpleado(int id) {
-        List<String> cantity= new ArrayList<>();
-        cantity.add(getFunction(id,"oracle"));
-        cantity.add(getFunction(id,"mys"));
-        return cantity;
+        List<String> quantity = new ArrayList<>();
+        quantity.add(getFunction(id, "oracle"));
+        quantity.add(getFunction(id, "mys"));
+        return quantity;
     }
 }

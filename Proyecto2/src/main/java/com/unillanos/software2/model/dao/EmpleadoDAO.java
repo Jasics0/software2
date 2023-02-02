@@ -7,7 +7,7 @@ package com.unillanos.software2.model.dao;
 import com.unillanos.software2.controller.transfer.dto.EmpleadoDTO;
 import com.unillanos.software2.model.database.implementation.EmpleadoRepositoryImpl;
 import com.unillanos.software2.model.entities.Empleado;
-import com.unillanos.software2.model.util.MapperUtil;
+import com.unillanos.software2.util.MapperUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,20 +23,16 @@ public class EmpleadoDAO {
         this.empleadoRepository = new EmpleadoRepositoryImpl();
     }
 
-
     public List<List<EmpleadoDTO>> Listar() {
         List<List<EmpleadoDTO>> response = new ArrayList<>();
         List<EmpleadoDTO> dto = new ArrayList<>();
         List<List<Empleado>> datos = empleadoRepository.findAll();
-
         for (int i = 0; i < 2; i++) {
             for (Empleado dato : datos.get(i)) {
                 dto.add(MapperUtil.entityToDtoEmpleado(dato));
             }
             response.add(dto);
         }
-
-
         return response;
     }
 

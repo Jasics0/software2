@@ -1,4 +1,4 @@
-package com.unillanos.software2.model.util;
+package com.unillanos.software2.util;
 
 import com.unillanos.software2.controller.transfer.dto.EmpleadoDTO;
 import com.unillanos.software2.model.entities.Empleado;
