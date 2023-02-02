@@ -8,17 +8,40 @@ import lombok.Getter;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 
 @Getter
 public class Conexion {
 
-    private Connection con;
+    private static Connection mySqlConnection;
 
-    public Conexion() {
-        con = con();
+    private static Connection oracleConnection;
+
+    private static Conexion conexion;
+
+    private Conexion() {
+        mySqlConnection = mySqlConnection();
+        oracleConnection = oracleConnection();
     }
 
-    public Connection con() {
+    public static Conexion getInstance() {
+        if (conexion==null){
+            conexion = new Conexion();
+        }
+        System.out.println(conexion);
+        return conexion;
+    }
+
+    public Connection getMySqlConnection(){
+        return mySqlConnection;
+    }
+
+    public Connection getOracleConnection(){
+        return oracleConnection;
+    }
+
+    private static Connection mySqlConnection() {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -28,4 +51,37 @@ public class Conexion {
         }
         return con;
     }
+
+    // init database constants
+    // com.mysql.jdbc.Driver
+    private static final String DATABASE_DRIVER = "oracle.jdbc.driver.OracleDriver";
+    private static final String DATABASE_URL = "jdbc:oracle:thin:@localhost:1521:xe";
+    private static final String USERNAME = "Henrro";
+    private static final String PASSWORD = "henrro";
+
+    private static Connection connection;
+    private static Properties properties;
+
+    private static Properties getProperties() {
+        if (properties == null) {
+            properties = new Properties();
+            properties.setProperty("user", USERNAME);
+            properties.setProperty("password", PASSWORD);
+        }
+        return properties;
+    }
+
+    private static Connection oracleConnection() {
+        if (connection == null) {
+            try {
+                Class.forName(DATABASE_DRIVER);
+                connection = DriverManager.getConnection(DATABASE_URL, getProperties());
+                connection.setAutoCommit(false);
+            } catch (ClassNotFoundException | SQLException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+        return connection;
+    }
+
 }

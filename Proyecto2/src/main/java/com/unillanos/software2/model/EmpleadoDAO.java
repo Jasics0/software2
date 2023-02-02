@@ -7,6 +7,7 @@ package com.unillanos.software2.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,23 +15,33 @@ import java.util.List;
  * @author oguev
  */
 public class EmpleadoDAO {
+    Conexion conexion;
+    private final Connection mySqlConnection;
 
-    private Conexion conexion = new Conexion();
-
-    private Connection con;
+    private final Connection oracleConnection;
 
     private PreparedStatement ps;
 
     private ResultSet rs;
 
     public EmpleadoDAO() {
-        con = conexion.getCon();
+        conexion=Conexion.getInstance();
+        mySqlConnection = conexion.getMySqlConnection();
+        oracleConnection = conexion.getOracleConnection();
     }
 
-    public List<Empleado> Listar() {
+    public Connection getConnection(String conexion) {
+        if (conexion.equals("oracle")) {
+            return this.oracleConnection;
+        } else {
+            return this.mySqlConnection;
+        }
+    }
+
+    public List<Empleado> Listar(String con) {
         List<Empleado> datos = new ArrayList<>();
         try {
-            ps = con.prepareStatement("select * from EMPLEADOS");
+            ps = getConnection(con).prepareStatement("select * from EMPLEADOS order by identificacion");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Empleado e = new Empleado();
@@ -59,11 +70,11 @@ public class EmpleadoDAO {
 
     //Save empleado
 
-    public int save(Empleado e) {
+    public int save(String con, Empleado e) {
         int r = 0;
         String sql = "insert into EMPLEADOS (identificacion,tipo, nombre_1, nombre_2, apellido_1, apellido_2, sexo, fecha_n, lugar_n, direccion, telefono, email, salario, activo, clave) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
-            ps = con.prepareStatement(sql);
+            ps = getConnection(con).prepareStatement(sql);
             ps.setInt(1, e.getId());
             ps.setString(2, e.getTipo());
             ps.setString(3, e.getNombre_1());
@@ -88,11 +99,11 @@ public class EmpleadoDAO {
 
     //Update empleado
 
-    public int update(Empleado e) {
+    public int update(String con, Empleado e) {
         int r = 0;
         String sql = "update EMPLEADOS set tipo=?, nombre_1=?, nombre_2=?, apellido_1=?, apellido_2=?, sexo=?, fecha_n=?, lugar_n=?, direccion=?, telefono=?, email=?, salario=?, activo=?, clave=? where identificacion=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = getConnection(con).prepareStatement(sql);
             ps.setString(1, e.getTipo());
             ps.setString(2, e.getNombre_1());
             ps.setString(3, e.getNombre_2());
@@ -117,16 +128,38 @@ public class EmpleadoDAO {
 
     //Delete empleado
 
-    public int delete(int id) {
+    public int delete(String con, int id) {
         String sql = "delete from EMPLEADOS where identificacion=?";
-        int r=0;
+        int r = 0;
         try {
-            ps = con.prepareStatement(sql);
+            ps = getConnection(con).prepareStatement(sql);
             ps.setInt(1, id);
-            r=ps.executeUpdate();
+            r = ps.executeUpdate();
+            if (con.equals("oracle")) {
+                getConnection(con).commit();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return r;
+    }
+
+    public String cantidadPagaEmpleado(String con, int id) throws SQLException {
+        String sql;
+        int r = 0;
+        try {
+            if (con.equals("oracle")) {
+                sql = "SELECT CANTIDAD_PAGA_EMPLEADO(?) FROM dual";
+            } else {
+                sql = "SELECT CANTIDAD_PAGA_EMPLEADO(?)";
+            }
+            ps = getConnection(con).prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        rs.next();
+        return rs.getString(1);
     }
 }
