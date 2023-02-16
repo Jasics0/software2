@@ -13,6 +13,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Date;
@@ -25,6 +26,18 @@ public class Controlador {
 
     private final EmpleadoDAO dao = new EmpleadoDAO();
     private final EmpleadoDTO e = new EmpleadoDTO();
+
+    private byte[] getRetrato(String ruta) {
+        File file = new File(ruta);
+        try{
+            byte[] bi = new byte[(int) file.length()];
+            InputStream input = getClass().getResourceAsStream(ruta);
+            input.read(bi);
+            return bi;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
 
     public DefaultTableModel listar(DefaultTableModel modelo,int d) {
@@ -63,7 +76,7 @@ public class Controlador {
         return modelo;
     }
 
-    public boolean guardar( String id, String nombre_1, String nombre_2, String apellido_1, String apellido_2, String sexo, Date fecha_n, String lugar_n, String direccion, String telefono, String email, int salario, String clave, String activo, byte[] retrato) {
+    public boolean guardar( String id, String nombre_1, String nombre_2, String apellido_1, String apellido_2, String sexo, Date fecha_n, String lugar_n, String direccion, String telefono, String email, int salario, String clave, String activo, String ruta) {
         String tipo = "CC";
         e.setId(Integer.parseInt(id));
         e.setTipo(tipo);
@@ -80,7 +93,7 @@ public class Controlador {
         e.setSalario(salario);
         e.setActivo(activo);
         e.setClave(clave);
-        e.setRetrato(retrato);
+        e.setRetrato(getRetrato(ruta));
         int response = dao.save(e);
         return response == 1;
     }

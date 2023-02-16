@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="260f8957-f5b7-49d0-b38a-004c8db0103e" name="Changes" comment="">
+    <list default="true" id="260f8957-f5b7-49d0-b38a-004c8db0103e" name="Changes" comment="si">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/Controlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/Render.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/Render.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/database/implementation/EmpleadoRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/database/implementation/EmpleadoRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/controller/Controlador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/controller/Controlador.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/view/Vista$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/view/Vista$1.class" afterDir="false" />
@@ -144,5 +141,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="si" />
+    <option name="LAST_COMMIT_MESSAGE" value="si" />
   </component>
 </project>

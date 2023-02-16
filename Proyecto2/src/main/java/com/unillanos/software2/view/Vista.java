@@ -36,17 +36,6 @@ public class Vista extends javax.swing.JFrame {
         tablaOracle.setDefaultRenderer(Object.class, new Render());
     }
 
-    private byte[] getRetrato(String ruta) {
-        File file = new File(ruta);
-        try{
-            byte[] bi = new byte[(int) file.length()];
-            InputStream input = getClass().getResourceAsStream(ruta);
-            input.read(bi);
-            return bi;
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
 
     /**
@@ -433,8 +422,8 @@ public class Vista extends javax.swing.JFrame {
             if (!txtsalario.getText().isEmpty() && txtsalario.getText() != null && !txtsalario.getText().equals("")) {
                 salario = Integer.parseInt(txtsalario.getText());
             }
-            c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString(), txtfoto.getText().getBytes());
-            c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString(), txtfoto.getText().getBytes());
+            c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString(), txtfoto.getText());
+            c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString(), txtfoto.getText());
         });
 
         btnlistar.addActionListener(evt -> {
@@ -469,6 +458,7 @@ public class Vista extends javax.swing.JFrame {
                 ImageIcon icon = new ImageIcon(ruta);
                 Icon icono = new ImageIcon(icon.getImage().getScaledInstance(lblfoto.getWidth(), lblfoto.getHeight(), Image.SCALE_DEFAULT));
                 lblfoto.setIcon(icono);
+                txtfoto.setText(ruta);
                 this.repaint();
             }
         });
