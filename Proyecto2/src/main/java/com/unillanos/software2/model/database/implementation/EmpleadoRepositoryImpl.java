@@ -69,7 +69,7 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
 
     private int saveEmpleado(Empleado e, String con) {
         int r = 0;
-        String sql = "insert into EMPLEADOS (identificacion,tipo, nombre_1, nombre_2, apellido_1, apellido_2, sexo, fecha_n, lugar_n, direccion, telefono, email, salario, activo, clave) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into EMPLEADOS (identificacion,tipo, nombre_1, nombre_2, apellido_1, apellido_2, sexo, fecha_n, lugar_n, direccion, telefono, email, salario, activo, clave,retrato) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = getConnection(con).prepareStatement(sql);
             ps.setInt(1, e.getId());
@@ -87,6 +87,7 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
             ps.setInt(13, e.getSalario());
             ps.setString(14, e.getActivo());
             ps.setString(15, e.getClave());
+            ps.setBytes(16, e.getRetrato());
             r = ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();

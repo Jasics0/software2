@@ -52,7 +52,7 @@ public class Controlador {
                 BufferedImage image = null;
                 InputStream in = new ByteArrayInputStream(bi);
                 image = ImageIO.read(in);
-                ImageIcon imgi = new ImageIcon(image.getScaledInstance(30, 30, 0));
+                ImageIcon imgi = new ImageIcon(image.getScaledInstance(40, 60, 0));
                 object[15] = new JLabel(imgi);
 
             }catch(Exception ex){
@@ -63,7 +63,7 @@ public class Controlador {
         return modelo;
     }
 
-    public boolean guardar( String id, String nombre_1, String nombre_2, String apellido_1, String apellido_2, String sexo, Date fecha_n, String lugar_n, String direccion, String telefono, String email, int salario, String clave, String activo) {
+    public boolean guardar( String id, String nombre_1, String nombre_2, String apellido_1, String apellido_2, String sexo, Date fecha_n, String lugar_n, String direccion, String telefono, String email, int salario, String clave, String activo, byte[] retrato) {
         String tipo = "CC";
         e.setId(Integer.parseInt(id));
         e.setTipo(tipo);
@@ -80,6 +80,7 @@ public class Controlador {
         e.setSalario(salario);
         e.setActivo(activo);
         e.setClave(clave);
+        e.setRetrato(retrato);
         int response = dao.save(e);
         return response == 1;
     }

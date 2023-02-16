@@ -7,7 +7,14 @@ package com.unillanos.software2.view;
 
 import com.unillanos.software2.controller.Controlador;
 import com.unillanos.software2.controller.Render;
+import com.unillanos.software2.model.entities.Empleado;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.io.File;
+import java.io.InputStream;
 import java.sql.SQLException;
 
 /**
@@ -22,10 +29,26 @@ public class Vista extends javax.swing.JFrame {
         initComponents();
     }
 
+    String ruta;
 
-    public void  cargarTabla()  {
+    public void cargarTabla() {
         tabla.setDefaultRenderer(Object.class, new Render());
+        tablaOracle.setDefaultRenderer(Object.class, new Render());
     }
+
+    private byte[] getRetrato(String ruta) {
+        File file = new File(ruta);
+        try{
+            byte[] bi = new byte[(int) file.length()];
+            InputStream input = getClass().getResourceAsStream(ruta);
+            input.read(bi);
+            return bi;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,6 +94,10 @@ public class Vista extends javax.swing.JFrame {
         btnfunction = new javax.swing.JButton();
         txtfuncionM = new javax.swing.JTextField();
         txtfuncionO = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtfoto = new javax.swing.JTextField();
+        btnfoto = new javax.swing.JButton();
+        lblfoto = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -147,7 +174,7 @@ public class Vista extends javax.swing.JFrame {
         btnfunction.setText("FUNCION");
         btnfunction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnfunctionActionPerformed(evt);
             }
         });
 
@@ -156,6 +183,10 @@ public class Vista extends javax.swing.JFrame {
 
         txtfuncionO.setEditable(false);
         txtfuncionO.setBorder(javax.swing.BorderFactory.createTitledBorder("Oracle"));
+
+        jLabel15.setText("FOTO");
+
+        btnfoto.setText("FOTO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -206,12 +237,14 @@ public class Vista extends javax.swing.JFrame {
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(jLabel12)
                                                         .addComponent(jLabel13)
-                                                        .addComponent(jLabel14))
+                                                        .addComponent(jLabel14)
+                                                        .addComponent(jLabel15))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(txtclave)
                                                         .addComponent(comboactivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(txtlugar))))
+                                                        .addComponent(txtlugar)
+                                                        .addComponent(txtfoto))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -229,58 +262,70 @@ public class Vista extends javax.swing.JFrame {
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addComponent(btnguardar)
                                                         .addGap(116, 116, 116)
-                                                        .addComponent(btnfunction))))
-                                .addContainerGap(129, Short.MAX_VALUE))
+                                                        .addComponent(btnfunction)))
+                                        .addComponent(btnfoto, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(8, 8, 8)
+                                .addComponent(lblfoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1)
-                                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6)
-                                        .addComponent(combosex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel11)
-                                        .addComponent(txtsalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnguardar)
-                                        .addComponent(btnfunction))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(txtnombre_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel7)
-                                        .addComponent(date_n, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel12)
-                                        .addComponent(comboactivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnlistar)
-                                        .addComponent(txtfuncionM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtfuncionO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel3)
-                                        .addComponent(txtnombre_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel8)
-                                        .addComponent(txtdireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel13)
-                                        .addComponent(txtclave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btneditar))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel4)
-                                        .addComponent(txtapellido_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel9)
-                                        .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btneliminar)
-                                        .addComponent(jLabel14)
-                                        .addComponent(txtlugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel5)
-                                        .addComponent(txtapellido_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel10)
-                                        .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(3, 3, 3)
+                                                .addComponent(lblfoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel1)
+                                                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel6)
+                                                        .addComponent(combosex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel11)
+                                                        .addComponent(txtsalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnguardar)
+                                                        .addComponent(btnfunction))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel2)
+                                                        .addComponent(txtnombre_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel7)
+                                                        .addComponent(date_n, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel12)
+                                                        .addComponent(comboactivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnlistar)
+                                                        .addComponent(txtfuncionM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(txtfuncionO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel3)
+                                                        .addComponent(txtnombre_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel8)
+                                                        .addComponent(txtdireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel13)
+                                                        .addComponent(txtclave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btneditar))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel4)
+                                                        .addComponent(txtapellido_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel9)
+                                                        .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btneliminar)
+                                                        .addComponent(jLabel14)
+                                                        .addComponent(txtlugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel5)
+                                                        .addComponent(txtapellido_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel10)
+                                                        .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel15)
+                                                        .addComponent(txtfoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnfoto))
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle"));
@@ -292,9 +337,10 @@ public class Vista extends javax.swing.JFrame {
 
                 },
                 new String[]{
-                        "ID", "TIPO", "NOMBRE_1", "NOMBRE_2", "APELLIDO_1", "APELLIDO_2", "SEXO", "FECHA_N", "LUGAR_N", "DIRECCION", "TELEFONO", "EMAIL", "SALARIO", "ACTIVO", "CLAVE", "retrato"
+                        "ID", "TIPO", "NOMBRE_1", "NOMBRE_2", "APELLIDO_1", "APELLIDO_2", "SEXO", "FECHA_N", "LUGAR_N", "DIRECCION", "TELEFONO", "EMAIL", "SALARIO", "ACTIVO", "CLAVE", "RETRATO"
                 }
         ));
+        tabla.setRowHeight(50);
         jScrollPane1.setViewportView(tabla);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -310,7 +356,7 @@ public class Vista extends javax.swing.JFrame {
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                                 .addContainerGap())
         );
 
@@ -321,9 +367,10 @@ public class Vista extends javax.swing.JFrame {
 
                 },
                 new String[]{
-                        "ID", "TIPO", "NOMBRE_1", "NOMBRE_2", "APELLIDO_1", "APELLIDO_2", "SEXO", "FECHA_N", "LUGAR_N", "DIRECCION", "TELEFONO", "EMAIL", "SALARIO", "ACTIVO", "CLAVE", "retrato"
+                        "ID", "TIPO", "NOMBRE_1", "NOMBRE_2", "APELLIDO_1", "APELLIDO_2", "SEXO", "FECHA_N", "LUGAR_N", "DIRECCION", "TELEFONO", "EMAIL", "SALARIO", "ACTIVO", "CLAVE", "RETRATO"
                 }
         ));
+        tablaOracle.setRowHeight(50);
         jScrollPane2.setViewportView(tablaOracle);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -339,8 +386,8 @@ public class Vista extends javax.swing.JFrame {
                 jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(17, Short.MAX_VALUE))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -353,8 +400,8 @@ public class Vista extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
@@ -380,13 +427,14 @@ public class Vista extends javax.swing.JFrame {
                                 .addContainerGap())
         );
 
+
         btnguardar.addActionListener(evt -> {
             int salario = 0;
             if (!txtsalario.getText().isEmpty() && txtsalario.getText() != null && !txtsalario.getText().equals("")) {
                 salario = Integer.parseInt(txtsalario.getText());
             }
-            c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString());
-            c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString());
+            c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString(), txtfoto.getText().getBytes());
+            c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString(), txtfoto.getText().getBytes());
         });
 
         btnlistar.addActionListener(evt -> {
@@ -411,6 +459,21 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
+        btnfoto.addActionListener(env -> {
+            JFileChooser fileChooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Images", "jpg", "gif");
+            fileChooser.setFileFilter(filter);
+
+            if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                ImageIcon icon = new ImageIcon(ruta);
+                Icon icono = new ImageIcon(icon.getImage().getScaledInstance(lblfoto.getWidth(), lblfoto.getHeight(), Image.SCALE_DEFAULT));
+                lblfoto.setIcon(icono);
+                this.repaint();
+            }
+        });
+
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -430,9 +493,13 @@ public class Vista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btneditarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnfunctionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfunctionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnfunctionActionPerformed
+
+    private void btnfotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfotoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnfotoActionPerformed
 
     private void cleanModel() {
         for (int i = 0; i < tablaOracle.getModel().getRowCount(); i++) {
@@ -463,18 +530,20 @@ public class Vista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btneditar;
     public javax.swing.JButton btneliminar;
+    private javax.swing.JButton btnfoto;
+    private javax.swing.JButton btnfunction;
     public javax.swing.JButton btnguardar;
     public javax.swing.JButton btnlistar;
     public javax.swing.JComboBox<String> comboactivo;
     public javax.swing.JComboBox<String> combosex;
     public org.jdesktop.swingx.JXDatePicker date_n;
-    private javax.swing.JButton btnfunction;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -489,6 +558,7 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblfoto;
     public javax.swing.JTable tabla;
     public javax.swing.JTable tablaOracle;
     public javax.swing.JTextField txtapellido_1;
@@ -496,6 +566,7 @@ public class Vista extends javax.swing.JFrame {
     public javax.swing.JTextField txtclave;
     public javax.swing.JTextField txtdireccion;
     public javax.swing.JTextField txtemail;
+    private javax.swing.JTextField txtfoto;
     private javax.swing.JTextField txtfuncionM;
     private javax.swing.JTextField txtfuncionO;
     public javax.swing.JTextField txtid;
