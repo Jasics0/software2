@@ -20,5 +20,5 @@ public class Empleado {
     int id, salario;
     String tipo, nombre_1, nombre_2, apellido_1, apellido_2, sexo, lugar_n, direccion, telefono, email, activo, clave;
     Date fecha_n;
-
+    byte [] retrato;
 }

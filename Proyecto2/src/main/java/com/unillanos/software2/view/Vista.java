@@ -288,7 +288,7 @@ public class Vista extends javax.swing.JFrame {
 
                 },
                 new String[]{
-                        "ID", "TIPO", "NOMBRE_1", "NOMBRE_2", "APELLIDO_1", "APELLIDO_2", "SEXO", "FECHA_N", "LUGAR_N", "DIRECCION", "TELEFONO", "EMAIL", "SALARIO", "ACTIVO", "CLAVE"
+                        "ID", "TIPO", "NOMBRE_1", "NOMBRE_2", "APELLIDO_1", "APELLIDO_2", "SEXO", "FECHA_N", "LUGAR_N", "DIRECCION", "TELEFONO", "EMAIL", "SALARIO", "ACTIVO", "CLAVE", "retrato"
                 }
         ));
         jScrollPane1.setViewportView(tabla);
@@ -317,7 +317,7 @@ public class Vista extends javax.swing.JFrame {
 
                 },
                 new String[]{
-                        "ID", "TIPO", "NOMBRE_1", "NOMBRE_2", "APELLIDO_1", "APELLIDO_2", "SEXO", "FECHA_N", "LUGAR_N", "DIRECCION", "TELEFONO", "EMAIL", "SALARIO", "ACTIVO", "CLAVE"
+                        "ID", "TIPO", "NOMBRE_1", "NOMBRE_2", "APELLIDO_1", "APELLIDO_2", "SEXO", "FECHA_N", "LUGAR_N", "DIRECCION", "TELEFONO", "EMAIL", "SALARIO", "ACTIVO", "CLAVE", "retrato"
                 }
         ));
         jScrollPane2.setViewportView(tablaOracle);

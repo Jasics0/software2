@@ -57,6 +57,7 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
                 e.setSalario(rs.getInt(13));
                 e.setActivo(rs.getString(14));
                 e.setClave(rs.getString(15));
+                e.setRetrato(rs.getBytes(16));
                 datos.add(e);
             }
 

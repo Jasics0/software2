@@ -8,7 +8,12 @@ package com.unillanos.software2.controller;
 import com.unillanos.software2.controller.transfer.dto.EmpleadoDTO;
 import com.unillanos.software2.model.dao.EmpleadoDAO;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +29,7 @@ public class Controlador {
 
     public DefaultTableModel listar(DefaultTableModel modelo,int d) {
         List<EmpleadoDTO> lista = dao.Listar().get(d);
-        Object[] object = new Object[15];
+        Object[] object = new Object[16];
         for (EmpleadoDTO empleadoDTO : lista) {
             object[0] = empleadoDTO.getId();
             object[1] = empleadoDTO.getTipo();
@@ -41,6 +46,18 @@ public class Controlador {
             object[12] = empleadoDTO.getSalario();
             object[13] = empleadoDTO.getActivo();
             object[14] = empleadoDTO.getClave();
+            try{
+                byte[] bi = empleadoDTO.getRetrato();
+                BufferedImage image = null;
+                InputStream in = new ByteArrayInputStream(bi);
+                image = ImageIO.read(in);
+                ImageIcon imgi = new ImageIcon(image.getScaledInstance(60, 60, 0));
+                object[15] = new JLabel(imgi);
+
+            }catch(Exception ex){
+                object[15] = new JLabel("No imagen");
+            }
+            object[15] = empleadoDTO.getRetrato();
             modelo.addRow(object);
         }
         return modelo;

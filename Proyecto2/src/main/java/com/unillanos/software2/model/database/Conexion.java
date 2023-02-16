@@ -56,8 +56,8 @@ public class Conexion {
     // com.mysql.jdbc.Driver
     private static final String DATABASE_DRIVER = "oracle.jdbc.driver.OracleDriver";
     private static final String DATABASE_URL = "jdbc:oracle:thin:@localhost:1521:xe";
-    private static final String USERNAME = "Henrro";
-    private static final String PASSWORD = "henrro";
+    private static final String USERNAME = "TODO";
+    private static final String PASSWORD = "123";
 
     private static Connection connection;
     private static Properties properties;

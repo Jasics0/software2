@@ -22,6 +22,7 @@ public class MapperUtil {
         empleado.setActivo(empleadoDTO.getActivo());
         empleado.setClave(empleadoDTO.getClave());
         empleado.setFecha_n(empleadoDTO.getFecha_n());
+        empleado.setRetrato(empleadoDTO.getRetrato());
         return empleado;
     }
 
@@ -42,6 +43,7 @@ public class MapperUtil {
         empleadoDTO.setActivo(empleado.getActivo());
         empleadoDTO.setClave(empleado.getClave());
         empleadoDTO.setFecha_n(empleado.getFecha_n());
+        empleadoDTO.setRetrato(empleado.getRetrato());
         return empleadoDTO;
     }
 

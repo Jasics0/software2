@@ -38,4 +38,5 @@ public class EmpleadoDTO {
 
     private Date fecha_n;
 
+    private byte [] retrato;
 }
