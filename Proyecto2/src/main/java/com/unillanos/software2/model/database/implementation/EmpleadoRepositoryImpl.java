@@ -161,15 +161,15 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
     public List<List<Empleado>> findAll() {
         List<List<Empleado>> data = new ArrayList<>();
         List<Empleado> ora = getEmpleados("oracle");
+       data.add(ora);
         List<Empleado> mys = getEmpleados("mys");
-        data.add(ora);
         data.add(mys);
         return data;
     }
 
     @Override
     public int save(Empleado empleado) {
-        int saved = saveEmpleado(empleado, "oracle");
+        int saved =saveEmpleado(empleado, "oracle");
         saved *= saveEmpleado(empleado, "mys");
         return saved;
     }

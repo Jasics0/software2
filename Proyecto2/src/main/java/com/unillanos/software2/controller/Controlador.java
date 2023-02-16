@@ -7,17 +7,17 @@ package com.unillanos.software2.controller;
 
 import com.unillanos.software2.controller.transfer.dto.EmpleadoDTO;
 import com.unillanos.software2.model.dao.EmpleadoDAO;
+import org.apache.commons.io.IOUtils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author oguev
@@ -27,20 +27,31 @@ public class Controlador {
     private final EmpleadoDAO dao = new EmpleadoDAO();
     private final EmpleadoDTO e = new EmpleadoDTO();
 
-    private byte[] getRetrato(String ruta) {
+    private byte[] getBytes(String ruta) {
         File file = new File(ruta);
-        try{
-            byte[] bi = new byte[(int) file.length()];
-            InputStream input = getClass().getResourceAsStream(ruta);
-            input.read(bi);
-            return bi;
-        } catch (Exception e) {
-            return null;
+        try {
+            FileInputStream fl = new FileInputStream(file);
+
+            //save file in /tmp
+
+            byte[] arr = new byte[(int) file.length()];
+
+            fl.read(arr);
+            fl.close();
+
+            IOUtils.write(arr, new FileOutputStream("src/main/resources/images/"+ UUID.randomUUID().toString().replace("-", "") + ".jpg"));
+            return arr;
+        } catch (Exception a) {
+            a.printStackTrace();
+            System.out.println("No se encontro la imagen");
         }
+
+        return null;
+
     }
 
 
-    public DefaultTableModel listar(DefaultTableModel modelo,int d) {
+    public DefaultTableModel listar(DefaultTableModel modelo, int d) {
         List<EmpleadoDTO> lista = dao.Listar().get(d);
         Object[] object = new Object[16];
 
@@ -60,15 +71,15 @@ public class Controlador {
             object[12] = empleadoDTO.getSalario();
             object[13] = empleadoDTO.getActivo();
             object[14] = empleadoDTO.getClave();
-            try{
+            try {
                 byte[] bi = empleadoDTO.getRetrato();
-                BufferedImage image = null;
+                BufferedImage image;
                 InputStream in = new ByteArrayInputStream(bi);
                 image = ImageIO.read(in);
                 ImageIcon imgi = new ImageIcon(image.getScaledInstance(40, 60, 0));
                 object[15] = new JLabel(imgi);
 
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 object[15] = new JLabel("No imagen");
             }
             modelo.addRow(object);
@@ -76,7 +87,7 @@ public class Controlador {
         return modelo;
     }
 
-    public boolean guardar( String id, String nombre_1, String nombre_2, String apellido_1, String apellido_2, String sexo, Date fecha_n, String lugar_n, String direccion, String telefono, String email, int salario, String clave, String activo, String ruta) {
+    public boolean guardar(String id, String nombre_1, String nombre_2, String apellido_1, String apellido_2, String sexo, Date fecha_n, String lugar_n, String direccion, String telefono, String email, int salario, String clave, String activo, String ruta) {
         String tipo = "CC";
         e.setId(Integer.parseInt(id));
         e.setTipo(tipo);
@@ -93,7 +104,7 @@ public class Controlador {
         e.setSalario(salario);
         e.setActivo(activo);
         e.setClave(clave);
-        e.setRetrato(getRetrato(ruta));
+        e.setRetrato(getBytes(ruta));
         int response = dao.save(e);
         return response == 1;
     }
@@ -119,12 +130,12 @@ public class Controlador {
         return response == 1;
     }
 
-    public boolean eliminar( int id) {
-        int response = dao.delete( id);
+    public boolean eliminar(int id) {
+        int response = dao.delete(id);
         return response == 1;
     }
 
-    public String cantidadPagaEmpleado(int id,int d) throws SQLException {
+    public String cantidadPagaEmpleado(int id, int d) throws SQLException {
         return dao.cantidadPagaEmpleado(id).get(d);
     }
 }

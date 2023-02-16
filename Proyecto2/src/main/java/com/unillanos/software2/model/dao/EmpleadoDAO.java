@@ -27,8 +27,8 @@ public class EmpleadoDAO {
         List<List<EmpleadoDTO>> response = new ArrayList<>();
         List<EmpleadoDTO> dto = new ArrayList<>();
         List<List<Empleado>> datos = empleadoRepository.findAll();
-        for (int i = 0; i < 2; i++) {
-            for (Empleado dato : datos.get(i)) {
+        for (List<Empleado> empleados : datos) {
+            for (Empleado dato : empleados) {
                 dto.add(MapperUtil.entityToDtoEmpleado(dato));
             }
             response.add(dto);
