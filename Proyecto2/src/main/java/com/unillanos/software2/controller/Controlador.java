@@ -30,6 +30,7 @@ public class Controlador {
     public DefaultTableModel listar(DefaultTableModel modelo,int d) {
         List<EmpleadoDTO> lista = dao.Listar().get(d);
         Object[] object = new Object[16];
+
         for (EmpleadoDTO empleadoDTO : lista) {
             object[0] = empleadoDTO.getId();
             object[1] = empleadoDTO.getTipo();
@@ -51,13 +52,12 @@ public class Controlador {
                 BufferedImage image = null;
                 InputStream in = new ByteArrayInputStream(bi);
                 image = ImageIO.read(in);
-                ImageIcon imgi = new ImageIcon(image.getScaledInstance(60, 60, 0));
+                ImageIcon imgi = new ImageIcon(image.getScaledInstance(30, 30, 0));
                 object[15] = new JLabel(imgi);
 
             }catch(Exception ex){
                 object[15] = new JLabel("No imagen");
             }
-            object[15] = empleadoDTO.getRetrato();
             modelo.addRow(object);
         }
         return modelo;

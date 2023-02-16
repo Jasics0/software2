@@ -6,7 +6,7 @@ package com.unillanos.software2.view;
 
 
 import com.unillanos.software2.controller.Controlador;
-
+import com.unillanos.software2.controller.Render;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 
@@ -22,6 +22,10 @@ public class Vista extends javax.swing.JFrame {
         initComponents();
     }
 
+
+    public void  cargarTabla()  {
+        tabla.setDefaultRenderer(Object.class, new Render());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -442,12 +446,14 @@ public class Vista extends javax.swing.JFrame {
         }
     }
 
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         Vista v = new Vista();
         c = new Controlador();
+        v.cargarTabla();
         v.setVisible(true);
         v.setLocationRelativeTo(v);
     }

@@ -5,26 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="260f8957-f5b7-49d0-b38a-004c8db0103e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/Render.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista2.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/Controlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/transfer/dto/EmpleadoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/transfer/dto/EmpleadoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/database/Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/database/Conexion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/database/implementation/EmpleadoRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/database/implementation/EmpleadoRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/entities/Empleado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/entities/Empleado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/util/MapperUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/util/MapperUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/Render.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/Render.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/controller/Controlador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/controller/Controlador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/controller/transfer/dto/EmpleadoDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/controller/transfer/dto/EmpleadoDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/dao/EmpleadoDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/dao/EmpleadoDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/database/Conexion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/database/Conexion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/database/implementation/EmpleadoRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/database/implementation/EmpleadoRepositoryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/database/interfaces/EmpleadoRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/database/interfaces/EmpleadoRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/entities/Empleado.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/entities/Empleado.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/view/Vista.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/view/Vista.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,32 +41,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "ToolWindowBuild.ShowToolbar": "false",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "279",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/marti/OneDrive/Documents/GitHub/software2/Proyecto2/lib/ojdbc11.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ToolWindowBuild.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;279&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/marti/OneDrive/Documents/GitHub/software2/Proyecto2/lib/ojdbc11.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Vista">
     <configuration name="Conexion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.unillanos.software2.model.Conexion" />
@@ -145,6 +130,7 @@
       <workItem from="1675085292987" duration="30000" />
       <workItem from="1676470899285" duration="1205000" />
       <workItem from="1676472122983" duration="7942000" />
+      <workItem from="1676508903725" duration="3546000" />
     </task>
     <servers />
   </component>
