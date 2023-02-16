@@ -52,7 +52,7 @@ public class Controlador {
 
 
     public DefaultTableModel listar(DefaultTableModel modelo, int d) {
-        List<EmpleadoDTO> lista = dao.Listar().get(d);
+        List<EmpleadoDTO> lista = dao.listar().get(d);
         Object[] object = new Object[16];
 
         for (EmpleadoDTO empleadoDTO : lista) {
@@ -104,7 +104,7 @@ public class Controlador {
         e.setSalario(salario);
         e.setActivo(activo);
         e.setClave(clave);
-        e.setRetrato(getBytes(ruta));
+        e.setRetrato((ruta != null && !ruta.equals("")) ? getBytes(ruta) : null);
         int response = dao.save(e);
         return response == 1;
     }

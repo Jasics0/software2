@@ -89,6 +89,9 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
             ps.setString(15, e.getClave());
             ps.setBytes(16, e.getRetrato());
             r = ps.executeUpdate();
+            if (con.equals("oracle")) {
+                getConnection(con).commit();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -97,6 +100,7 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
 
     private int deleteEmpleado(int id, String con) {
         String sql = "delete from EMPLEADOS where identificacion=?";
+        System.out.println("Borrando empleado con id: " + id);
         int r = 0;
         try {
             ps = getConnection(con).prepareStatement(sql);
@@ -132,6 +136,9 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
             ps.setString(14, e.getClave());
             ps.setInt(15, e.getId());
             r = ps.executeUpdate();
+            if (con.equals("oracle")) {
+                getConnection(con).commit();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }

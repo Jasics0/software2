@@ -6,17 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="260f8957-f5b7-49d0-b38a-004c8db0103e" name="Changes" comment="si">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/controller/Controlador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/dao/EmpleadoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/dao/EmpleadoDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/database/implementation/EmpleadoRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/model/database/implementation/EmpleadoRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unillanos/software2/view/Vista.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/controller/Controlador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/controller/Controlador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/dao/EmpleadoDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/dao/EmpleadoDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/database/implementation/EmpleadoRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/database/implementation/EmpleadoRepositoryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/database/interfaces/EmpleadoRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/database/interfaces/EmpleadoRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/model/util/MapperUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/unillanos/software2/view/Vista.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unillanos/software2/view/Vista.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

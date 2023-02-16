@@ -23,7 +23,7 @@ public class EmpleadoDAO {
         this.empleadoRepository = new EmpleadoRepositoryImpl();
     }
 
-    public List<List<EmpleadoDTO>> Listar() {
+    public List<List<EmpleadoDTO>> listar() {
         List<List<EmpleadoDTO>> response = new ArrayList<>();
         List<EmpleadoDTO> dto = new ArrayList<>();
         List<List<Empleado>> datos = empleadoRepository.findAll();
@@ -32,6 +32,7 @@ public class EmpleadoDAO {
                 dto.add(MapperUtil.entityToDtoEmpleado(dato));
             }
             response.add(dto);
+            dto = new ArrayList<>();
         }
         return response;
     }

@@ -418,10 +418,10 @@ public class Vista extends javax.swing.JFrame {
                 salario = Integer.parseInt(txtsalario.getText());
             }
             c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString(), txtfoto.getText());
-            c.guardar(txtid.getText(), txtnombre_1.getText(), txtnombre_2.getText(), txtapellido_1.getText(), txtapellido_2.getText(), combosex.getSelectedItem().toString(), date_n.getDate(), txtlugar.getText(), txtdireccion.getText(), txttelefono.getText(), txtemail.getText(), salario, txtclave.getText(), comboactivo.getSelectedItem().toString(), txtfoto.getText());
         });
 
         btnlistar.addActionListener(evt -> {
+            cleanModel();
             tablaOracle.setModel(c.listar((DefaultTableModel) tablaOracle.getModel(), 0));
             tabla.setModel(c.listar((DefaultTableModel) tabla.getModel(), 1));
         });
